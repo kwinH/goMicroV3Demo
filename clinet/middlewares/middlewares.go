@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	pd "goMicroClient/proto"
+	pd "goMicroSrv/proto"
 )
 
 func InitMiddleware(prodService pd.ProdService) gin.HandlerFunc {

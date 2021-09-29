@@ -1,10 +1,9 @@
 package handler
 
 import (
-	"github.com/afex/hystrix-go/hystrix"
 	"github.com/gin-gonic/gin"
-	"goMicroClient/handler"
-	pd "goMicroClient/proto"
+	"goMicroSrv/handler"
+	pd "goMicroSrv/proto"
 	"strconv"
 )
 
@@ -30,32 +29,8 @@ func GetProdsList(context *gin.Context) {
 		var prodRes *pd.ProdListResponse
 
 		prodRes, _ = prodS.GetProdsList(context, &prodReq)
-		context.JSON(200, gin.H{"code":prodRes.Code,"data": prodRes.Data})
+		context.JSON(200, gin.H{"code": prodRes.Code, "data": prodRes.Data})
 
 		return
-
-		//熔断 第一步：配置config
-		configA := hystrix.CommandConfig{
-			Timeout: 1000,
-		}
-
-		//熔断 第一步：配置command
-		hystrix.ConfigureCommand("getprods", configA)
-
-		//熔断 第一步：配置command
-		err := hystrix.Do("getprods", func() error {
-			prodRes, err = prodS.GetProdsList(context, &prodReq)
-			return err
-		}, func(err error) error {
-			prodRes, err = defaultGetProdsList()
-			return err
-		})
-
-		if err != nil {
-			context.JSON(500, gin.H{"status": err.Error()})
-		} else {
-			context.JSON(200, gin.H{"data": prodRes.Data})
-		}
 	}
-
 }

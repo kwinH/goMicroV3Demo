@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"goMicroClient/handler"
-	middlewares2 "goMicroClient/client/middlewares"
-	pd "goMicroClient/proto"
+	"goMicroCli/handler"
+	middlewares2 "goMicroCli/middlewares"
+	pd "goMicroSrv/proto"
 )
 
 func NewGinRouter(prodService pd.ProdService) *gin.Engine {

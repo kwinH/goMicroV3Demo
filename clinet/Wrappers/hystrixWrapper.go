@@ -1,12 +1,12 @@
-package Wrappers
+package wrappers
 
 import (
 	"context"
 	"fmt"
 	"github.com/afex/hystrix-go/hystrix"
 	"github.com/asim/go-micro/v3/client"
-	"goMicroClient/handler"
-	pd "goMicroClient/proto"
+	"goMicroSrv/handler"
+	pd "goMicroSrv/proto"
 	"strconv"
 )
 
